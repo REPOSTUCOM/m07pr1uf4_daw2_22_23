@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SuperheroController;
-use App\Http\Controllers\GeolocationController;
+use App\Http\Controllers\HolidayController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 /*
@@ -24,7 +24,10 @@ Route::get('/superheroes/{id}/powerstats', [SuperheroController::class, 'getSupe
 Route::get('/superheroes/{id}/biography', [SuperheroController::class, 'getSuperheroBiographyById']);
 Route::get('/superheroes/{id}/work', [SuperheroController::class, 'getSuperheroWorkById'])->name('superheroes.getWorkById');
 
-Route::get('/geolocation', [GeolocationController::class, 'getGeolocation'])->name('geolocation.get');
+Route::get('/holidays', [HolidayController::class, 'getHolidays']);
+Route::get('/countries', [HolidayController::class, 'getCountries']);
+Route::get('/languages', [HolidayController::class, 'getLanguages']);
+Route::get('/workday', [HolidayController::class, 'getWorkDay']);
 
 
 
