@@ -16,6 +16,7 @@ class AuthController extends Controller
     ]);
     return response()->json(['message' => 'User signed up successfully'], 201);
     }
+    
     public function login(Request $request){
             $validator = Validator::make($request->all(), [
             'email' => 'required | email',
