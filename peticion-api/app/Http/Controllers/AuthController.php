@@ -45,6 +45,14 @@ class AuthController extends Controller
             $jwt = JWT::encode($payload, config('app.key'), 'HS256');
             return response()->json(['token' => $jwt]);
     }
-    public function logout(Request $request){
+    public function logout(Request $request)
+    {
+        // Obtener el token de autenticación del encabezado de la solicitud
+        $token = $request->header('Authorization');
+    
+        // Realizar cualquier lógica adicional que desees para el cierre de sesión
+    
+        return response()->json(['message' => 'User logged out successfully']);
     }
+    
 }
