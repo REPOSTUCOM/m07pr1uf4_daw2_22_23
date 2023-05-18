@@ -5,6 +5,7 @@ use App\Models\User;
 use Firebase\JWT\JWT;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Cache;
 
 class AuthController extends Controller
 {
@@ -51,9 +52,14 @@ class AuthController extends Controller
         // Obtener el token de autenticación del encabezado de la solicitud
         $token = $request->header('Authorization');
     
-        // Realizar cualquier lógica adicional que desees para el cierre de sesión
+        // Verificar si el token está presente
+        if ($token) {
+            // Revocar el token eliminándolo del almacenamiento en caché
+            Cache::put('revoked_tokens:' . $token, true, 60 * 24); // El token se considera revocado por 24 horas    
+            return response()->json(['message' => 'User logged out successfully']);
+        }
     
-        return response()->json(['message' => 'User logged out successfully']);
+        return response()->json(['error' => 'Token not provided'], 400);
     }
     
 }
